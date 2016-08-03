@@ -1,0 +1,12 @@
+<system-data-structure>
+    <text identifier="name" label="Name"/>
+    <text identifier="school" label="College or School"/>
+    <group identifier="titles" label="Titles">
+        <text identifier="title" label="Title" multiple="true"/>
+    </group>
+    <text identifier="room" label="Office"/>
+    <text identifier="phone" label="Phone"/>
+    <text identifier="email" label="E-mail"/>
+    <asset type="file" identifier="photo" label="Photo"/>
+    <text wysiwyg="true" identifier="content" label="Content"/>
+</system-data-structure>
