@@ -1,0 +1,54 @@
+#set ($pageStructure = $_XPathTool.selectSingleNode($contentRoot, "/system-data-structure"))
+
+#set ($name = "")
+#set ($school = "")
+#set ($room = "")
+#set ($phone = "")
+#set ($content = "")
+#set ($photo = "")
+#set ($titles = "")
+#set ($email = "")
+
+#set ($name = $_SerializerTool.serialize($pageStructure.getChild("name"), true))
+#set ($school = $_SerializerTool.serialize($pageStructure.getChild("school"), true))
+#set ($room = $_SerializerTool.serialize($pageStructure.getChild("room"), true))
+#set ($phone = $_SerializerTool.serialize($pageStructure.getChild("phone"), true))
+#set ($email = $_SerializerTool.serialize($pageStructure.getChild("email"), true))
+#set ($content = $_SerializerTool.serialize($pageStructure.getChild("content"), true))
+#set ($photo = $_SerializerTool.serialize($pageStructure.getChild("photo").getChild("path"), true))
+
+#set ($titles = $_XPathTool.selectNodes($pageStructure, "titles/title"))
+
+<div class="remainder-box normal_page component">
+    <div class="roster-info">
+        <div class="col-xs-12 col-sm-4 roster-photo">
+            #if ($photo != "/")
+                <img src="$photo" alt="$name"/>
+            #end
+        </div>
+        <div class="col-xs-12 col-sm-8" style="padding-left:0;">
+            <ul class="list-unstyled" style="padding-left:0;">
+                #if ($school != "")
+                    <li><b>$school</b></li>
+                #end
+                #foreach ($title in $titles)
+                    #if ($title.value != "")
+                        <li>$title.value</li>
+                    #end
+                #end
+                #if ($room != "")
+                    <li><b>Office:</b> $room</li>
+                #end
+                #if ($phone != "")
+                    <li><b>Phone:</b> $phone</li>
+                #end
+                #if ($email != "")
+                    <li><a href="mailto:$email">$email</a></li>
+                #end
+            </ul>
+        </div>            
+        #if ($content != "")
+            $content
+        #end
+    </div>
+</div>
