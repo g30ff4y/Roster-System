@@ -1,0 +1,82 @@
+<script type="text/javascript">// <![CDATA[
+    require([ "jquery", "height_equalizer", "accordion-tabs"], function ($, height_equalizer) {
+        $(function() {
+            $(".profile_accordion").accordion({
+                header: ".info_click",
+                heightStyle: "content", 
+                active: false,
+                collapsible: true,
+                "activate": function () {
+                    height_equalizer.equalize([".dept_leftnav", ".content-area"]);
+                }
+            });
+        });
+    });
+// ]]></script>
+
+#set ($pageStructure = $_XPathTool.selectSingleNode($contentRoot, "/system-index-block"))
+#set ($callingPage = $_XPathTool.selectSingleNode($pageStructure, "calling-page/system-page"))
+#set ($people = $_XPathTool.selectNodes($pageStructure , "system-page"))
+
+<div class="remainder-box normal_page component">
+    #foreach ($person in $people)
+        #set ($innerStructure = "")
+        #set ($name = "")
+        #set ($school ="")
+        #set ($room = "")
+        #set ($phone = "")
+        #set ($content = "")
+        #set ($photo = "")
+        #set ($titles = "")
+        #set ($email = "")
+    
+        #set ($innerStructure = $_XPathTool.selectSingleNode($person , "system-data-structure"))
+    
+        #set ($name = $_SerializerTool.serialize($innerStructure.getChild("name"), true))
+        #set ($school = $_SerializerTool.serialize($innerStructure.getChild("school"), true))
+        #set ($room = $_SerializerTool.serialize($innerStructure.getChild("room"), true))
+        #set ($phone = $_SerializerTool.serialize($innerStructure.getChild("phone"), true))
+        #set ($email = $innerStructure.getChild("email").text)
+        #set ($content = $_SerializerTool.serialize($innerStructure.getChild("content"), true))
+        #set ($photo = $_SerializerTool.serialize($innerStructure.getChild("photo").getChild("path"), true))
+        
+        #set ($titles = $_XPathTool.selectNodes($innerStructure, "titles/title"))
+##        #set ($emails = $_XPathTool.selectNodes($innerStructure, "emails/email"))
+        
+        <div class="profile_accordion">        
+            <div class="info_click">
+                <div class="row-fluid">
+                    <div class="col-xs-4 roster-name">
+                        #if ($name != "")<h2>$name</h2>#end
+                    </div>
+                    <div class="col-sm-6 col-xs-4 roster-contact">
+                        <ul class="roster-affiliations">
+                            #if ($school != "")<li class="roster-school"><b>$school</b></li>#end
+                            #foreach ($title in $titles)
+                                #if ($title.value != "")<li class="roster-title">$title.value</li>#end
+                            #end
+                        </ul>
+                        #if ($phone != "<phone />")
+                            <span class="hidden-xs hidden-sm roster-phone">Phone: $phone<br /></span>
+                            <span class="hidden-md hidden-lg roster-phone">Phone: <a href="tel://$phone">$phone</a><br /></span>
+                        #end
+                        #if ($email != "")
+                            <span class="roster-email"><a href="mailto:$email">$email</a><br />
+                        #end
+                        #if ($room != "<room />")
+                            <span class="roster-office">Office: $room</span><br />
+                            #*The University of Montana <br />
+                            Missoula, MT 59812 <br />*#
+                        #end
+                    </div>
+                    <div class="pull-right col-sm-2 col-xs-4 roster-photo">
+                        #if ($photo != "/")<img class="pull-right" src="$photo" alt="$name" />#end
+                    </div>
+                </div> ##row
+            </div>          
+            <div id="info">
+                #if ($content != "<content />")<span class="roster-bio">$content</span>#end
+            </div>           
+        </div> ##profile
+    #end
+</div>
