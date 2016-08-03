@@ -22,7 +22,7 @@ The Roster is a system designed to display people associated with an office, lab
 
 ####Configuration Set
 
-1. On the site you are implementing the Roster System, browse to the Administration menu and select Configuration Sets (![cascade-configuration-set.png](https://bitbucket.org/repo/G9KG4E/images/1025319023-cascade-configuration-set.png)).
+1. On the site you are implementing the Roster System, browse to the Administration menu and select Configuration Sets.
 2. Copy the Page Configuration Set using the flyout menu to the right of the file name, before clicking submit, rename the new Configuration Set to Roster.
 3. Edit the Roster Configuration Set.
 4. In the Format section of the DEFAULT region, choose a new Format by clicking on the existing Format.
@@ -31,7 +31,7 @@ The Roster is a system designed to display people associated with an office, lab
 
 ####Content Type
 
-1. Select Content Types (![cascade-content-type.png](https://bitbucket.org/repo/G9KG4E/images/155501841-cascade-content-type.png)) from the Administration Menu or Left Navigation.
+1. Select Content Types from the Administration Menu or Left Navigation.
 2. Copy the Page Content Type using the flyout menu to the right of the file name, before clicking submit, rename the new Content Type to Roster.
 3. Edit the Roster Content Type.
 4. Configuration Set: Connect the Roster Configuration Set you just made.
